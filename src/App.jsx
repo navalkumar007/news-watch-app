@@ -1,17 +1,29 @@
 import React from "react";
-import { Flex, Spacer, Center, Text, Square, Box } from "@chakra-ui/react";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
+
+//styles
 import "./App.scss";
 
+//layouts
+import Layout from "./layouts/Layout";
+import Home from "./pages/Home";
+
+//Router and routes
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Layout />}>
+      <Route index element={<Home />} />
+    </Route>
+  )
+);
+
 function App() {
-  return (
-    <Flex bg="black">
-      <Box w="70px" h="10" bg="red.500" />
-      <Spacer />
-      <Box w="70px" h="10" bg="red.500" />
-      <Spacer />
-      <Box w="70px" h="10" bg="red.500" />
-    </Flex>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
