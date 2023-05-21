@@ -5,9 +5,11 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import { ColorModeScript } from '@chakra-ui/react'
 
 //styles
 import "./App.scss";
+import theme from './theme/theme';
 
 //layouts
 import Layout from "./layouts/Layout";
@@ -23,7 +25,12 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+      <RouterProvider router={router} />
+    </>
+  );
 }
 
 export default App;
