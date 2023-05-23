@@ -4,7 +4,7 @@ import { Box, useColorModeValue, Center, Badge, Button, Skeleton, Spinner, useTo
 
 import { Countdown } from "../components/Countdown";
 import { TopHeadlines } from "../components/TopHeadlines";
-import { OtherNews } from "../components/OtherNews";
+import { OtherLocalNews } from "../components/OtherLocalNews";
 import NewsDataService from "../services/NewsService";
 
 import '../index.scss';
@@ -39,7 +39,7 @@ export default function Home() {
       setApiData(response.data);
       setIsLoading(false);
       showToast('Loaded.', 'News data updated!', 'success');
-      console.log(response.data);
+      // console.log(response.data);
     })
       .catch((e) => {
         //Log the error
@@ -97,8 +97,8 @@ export default function Home() {
         ) :
           (
             <>
-              <TopHeadlines mt='0.5rem' headline='Local News' />
-              <OtherNews headline='Other Local News' />
+              <TopHeadlines mt='0.5rem' baseMb='0rem' mdMb='1.5rem' headline='Local News' featured={apiData[0].featured}/>
+              <OtherLocalNews headline='Other Local News' otherLocalNews={apiData[0].others} />
               {/* 
               <TopHeadlines mt='0' headline='Business News' />
               <OtherNews headline='Other Business News' /> */}

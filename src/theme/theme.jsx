@@ -24,7 +24,7 @@ const CustomTheme = extendTheme({
   styles: {
     global: (props) => ({
       'body::-webkit-scrollbar-thumb': {
-        'background-color': mode('#bec3cc', '#31058a')(props),
+        'backgroundColor': mode('#bec3cc', '#31058a')(props),
       },
     })
   },
