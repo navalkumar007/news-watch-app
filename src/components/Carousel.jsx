@@ -149,14 +149,14 @@ export default function Carousel({ cards }) {
                     {/* <Text fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
                       {card.title}
                     </Text> */}
-                    <Box bg={useColorModeValue("whiteAlpha.500", "blackAlpha.500")} rounded={'lg'} px='0.5rem' >
+                    <Box bg={useColorModeValue("whiteAlpha.500", "blackAlpha.700")} rounded={'lg'} px='0.5rem' >
 
                       <Text fontSize={{ base: 'md', lg: 'lg' }} color={useColorModeValue("black", "white")} fontWeight='semibold' align='center'>
                         {card.text}
                       </Text>
                     </Box>
                     <Center>
-                      <Badge borderRadius='full' mt="1rem" px='2' py='1' bg={useColorModeValue("gray.300", "gray.200")} color='gray.600' ml="0.25em" fontStyle='italic'>
+                      <Badge borderRadius='full' mt="1rem" px='2' py='1' bg={useColorModeValue("gray.300", "blackAlpha.700")} color={useColorModeValue("gray.800", "white")} ml="0.25em" fontStyle='italic'>
                         {card.badgeText}
                       </Badge>
                     </Center>
