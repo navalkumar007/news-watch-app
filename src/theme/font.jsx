@@ -7,20 +7,38 @@ const Fonts = () => (
         font-family: "Khand";
         font-style: normal;
         font-weight: 400;
-        src: local("Khand"), local("Khand-Regular"), url("../public/fonts/Khand/Khand-Regular.ttf") format("truetype");
+        src: local("Khand"), local("Khand-Regular"), url("/fonts/Khand/Khand-Regular.ttf") format("truetype");
     }
 
     @font-face {
         font-family: "Khand";
         font-style: bold;
         font-weight: 700;
-        src: local("Khan Bold"), local("Khand-Bold"), url("../public/fonts/Khand/Khand-Bold.ttf") format("truetype");
+        src: local("Khand Bold"), local("Khand-Bold"), url("/fonts/Khand/Khand-Bold.ttf") format("truetype");
     }
     
     @font-face {
         font-family: "Oooh Baby";
-        src: local("Oooh Baby"), url("../public/fonts/OoohBaby/OoohBaby-Regular.ttf") format("truetype");
+        src: local("Oooh Baby"), url("/fonts/OoohBaby/OoohBaby-Regular.ttf") format("truetype");
     }
+  
+    
+    @font-face {
+        font-family: "Oooh Baby";
+        src: local("Oooh Baby"), url("/fonts/OoohBaby/OoohBaby-Regular.ttf") format("truetype");
+    }
+  
+    @font-face{
+      font-family: "Mona Sans Black";
+      src: local("Mona Sans Black"), local("Mona-Sans-Black"), url("/fonts/Mona Sans/Mona-Sans-Black.ttf") format("truetype");
+    }
+  
+  
+    @font-face{
+      font-family: "Mona Sans Narrow";
+      src: local("Mona Sans Black Narrow"), local("Mona-Sans-Black-Narrow"), url("/fonts/Mona Sans/Mona-Sans-BlackNarrow.ttf") format("truetype");
+    }
+  
     `}
   />
 );
