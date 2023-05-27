@@ -13,6 +13,7 @@ import {
   Badge,
   useColorModeValue,
   Link,
+  useMediaQuery
 } from "@chakra-ui/react";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 import Slider from "react-slick";
@@ -35,27 +36,27 @@ export default function Carousel({ cards, headline }) {
   // change the state
   const [slider, setSlider] = useState(null);
 
+  //Checking screen height
+  const [isLessThanRegularHeight] = useMediaQuery("(max-height: 690px)")
+
   // These are the breakpoints which changes the position of the
   // buttons as the screen size changes
-  const top = useBreakpointValue({ base: "90%", md: "50%" });
-  const side = useBreakpointValue({ base: "20%", md: "70px" });
+  const top = useBreakpointValue({ base: "90%", md: isLessThanRegularHeight ? "40%" : "32%", lg: "40%" });
+  const side = useBreakpointValue({ base: "20%", md: "50px" });
 
   return (
     <Flex
-      h={{ base: "80vh", md: "100vh" }}
+      mb='2rem'
       flexDir="column"
-      justifyContent={"space-evenly"}
     >
       <Box w="100%">
         <Center fontWeight="bold" fontSize={22} letterSpacing="1px">
           {headline}
         </Center>
       </Box>
-      <Box
-        h="88%"
+      <Flex
         ml="auto"
         mr="auto"
-        mt="-1"
         width="95%"
         bg={useColorModeValue("white", "black")}
         p="1rem"
@@ -63,6 +64,7 @@ export default function Carousel({ cards, headline }) {
         borderColor={useColorModeValue("gray.100", "white")}
         borderRadius="lg"
         borderWidth="2px"
+        h="75vh"
       >
         <Box
           position={"relative"}
@@ -120,7 +122,6 @@ export default function Carousel({ cards, headline }) {
             {cards.map((card, index) => (
               <Box
                 key={index}
-                height={"100%"}
                 position="relative"
                 backgroundPosition={{ base: "top", lg: "center" }}
                 backgroundRepeat="no-repeat"
@@ -129,10 +130,10 @@ export default function Carousel({ cards, headline }) {
                 border="0"
                 outline={"none"}
               >
-                <Container w="100%" h="100%">
+                <Container w={{ base: "100%", md: "70%" }} h="100%">
                   <Container
                     size="container.lg"
-                    height="80vh"
+                    height={{ base: isLessThanRegularHeight ? "49vh" : "54vh", md: "61vh" }}
                     position="relative"
                     p="0"
                   >
@@ -148,17 +149,18 @@ export default function Carousel({ cards, headline }) {
                       <Stack
                         spacing={4}
                         position="absolute"
-                        top={{ base: "50%", md: "60%" }}
-                        transform="translate(0, -50%)"
+                        top={{ base: "55%", md: "60%" }}
+                        left={'12px'}
+                        transform={{ base: "translate(0%, -40%)", md: "translate(0%, -60%)" }}
                         alignItems={"center"}
-                        p="1rem"
-                        backgroundColor="whiteAlpha.700"
+                        p="0.75rem"
+                        backgroundColor={{ sm: "transparent", md: "whiteAlpha.700" }}
                         rounded={"lg"}
                       >
                         <Box
                           bg={useColorModeValue("#e6e8ee", "blackAlpha.700")}
                           rounded={"lg"}
-                          px="0.5rem"
+                          p="0.5rem"
                         >
                           <Text
                             fontSize={{ base: "sm", md: "md", lg: "lg" }}
@@ -192,7 +194,7 @@ export default function Carousel({ cards, headline }) {
             ))}
           </Slider>
         </Box>
-      </Box>
+      </Flex>
     </Flex>
   );
 }
