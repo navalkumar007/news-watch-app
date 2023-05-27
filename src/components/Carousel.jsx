@@ -46,7 +46,6 @@ export default function Carousel({ cards, headline }) {
 
   return (
     <Flex
-      mb='2rem'
       flexDir="column"
     >
       <Box w="100%">
