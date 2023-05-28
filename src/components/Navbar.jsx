@@ -15,7 +15,10 @@ export default function Navbar() {
   return (
     <>
       <Box
-        bg={useColorModeValue("white", "darkThemeColor.900")}
+        bg={useColorModeValue(
+          "linear-gradient(rgba(248, 247, 216, 0.6),rgba(248, 247, 216, 0.6))",
+          "darkThemeColor.900"
+        )}
         px={4}
         transition="background-color 200ms linear"
       >

@@ -48,9 +48,13 @@ export const Card = ({
           marginRight="auto"
           mt={{ base: "1rem", md: "0rem" }}
           transform={{ base: "none" }}
-          backgroundSize={'cover'}
-          bgImage={useColorModeValue("linear-gradient(rgba(248, 247, 216, 0.6),rgba(248, 247, 216, 0.6)), " + Constants.NEWS_BACKGROUNDIMG_URL,
-            "linear-gradient(rgba(97, 96, 216, 0.6),rgba(248, 247, 216, 0.6)) , " + Constants.NEWS_BACKGROUNDIMG_URL)}
+          backgroundSize={"cover"}
+          bgImage={useColorModeValue(
+            "linear-gradient(rgba(248, 247, 216, 0.6),rgba(248, 247, 216, 0.6)), " +
+              Constants.NEWS_BACKGROUNDIMG_URL,
+            "linear-gradient(rgba(97, 96, 216, 0.7),rgba(248, 247, 216, 0.6)) , " +
+              Constants.NEWS_BACKGROUNDIMG_URL
+          )}
           borderColor={useColorModeValue("gray.100", "white")}
           borderRadius="lg"
           borderWidth="1px"
@@ -82,13 +86,16 @@ export const Card = ({
                 loading="lazy"
               />
             </Flex>
-            <Box p={6} textAlign='center' mx={'2rem'}>
+            <Box p={6} textAlign="center" mx={"2rem"}>
               <Center
                 fontWeight="semibold"
                 fontSize={{ base: 12, md: 15 }}
                 letterSpacing="0.5px"
-                rounded={'md'}
-                bg={useColorModeValue("transparent", "linear-gradient(rgba(21, 2, 58, 0.9),rgba(97, 96, 216, 0.9))")}
+                rounded={"md"}
+                bg={useColorModeValue(
+                  "transparent",
+                  "linear-gradient(rgba(21, 2, 58, 0.9),rgba(97, 96, 216, 0.9))"
+                )}
                 py="5px"
                 px="1rem"
               >
@@ -97,7 +104,7 @@ export const Card = ({
               <Center>
                 <Badge
                   borderRadius="full"
-                  border={'1px'}
+                  border={"1px"}
                   mt="1rem"
                   px="2"
                   py="0.5rem"
