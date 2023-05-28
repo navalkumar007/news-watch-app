@@ -9,22 +9,29 @@ import {
   Skeleton,
   Spinner,
   useToast,
-  useColorMode,
+  Spacer,
 } from "@chakra-ui/react";
-
-import { Countdown } from "../components/Countdown";
-import { TopHeadlines } from "../components/TopHeadlines";
-import { OtherLocalNews } from "../components/OtherLocalNews";
-import NewsDataService from "../services/NewsService";
 
 import "../index.scss";
 
+import { CleanImgSrcLink, CapitalizeFirstLetter } from "../helpers/functions";
+import * as Constants from "../constants/constants";
+import { Countdown } from "../components/Countdown";
+import { DualCardSection } from "../components/DualCards";
+import Carousel from './../components/Carousel';
+import NewsDataService from "../services/NewsService";
+
+
 export default function Home() {
-  const { colorMode } = useColorMode();
   const toast = useToast();
   const childRef = useRef(null);
   const [apiData, setApiData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [localFeatured, setLocalFeatured] = useState([]);
+  const [BusinessFeatured, setBusinessFeatured] = useState({});
+  const [BusinessTop, setBusinessTop] = useState([]);
+  const [OtherNewsLocal, setOtherNewsLocal] = useState({});
+  const [OtherNewsBusiness, setOtherNewsBusiness] = useState({});
 
   const handleClick = () => {
     childRef.current.handleReset();
@@ -48,12 +55,8 @@ export default function Home() {
       .then((response) => {
         //Load the api data
         setApiData(response.data);
-        setIsLoading(false);
-        showToast("Loaded.", "News data updated!", "success");
-        // console.log(response.data);
       })
       .catch((e) => {
-        //Log the error
         showToast(
           "Error",
           "Something went wrong. Please check if the original website is still running",
@@ -70,15 +73,47 @@ export default function Home() {
 
   useEffect(() => {
     if (apiData.length !== 0) {
-      return () => setIsLoading(false);
+
+      //Set the values
+      setLocalFeatured(apiData[0].featured);
+      setBusinessFeatured(apiData[0].business.featBusinessArticle);
+      setBusinessTop(apiData[0].business.topBusinessArticle);
+
+      const otherLocalNews = apiData[0].others.map((item) => {
+        return {
+          title: "",
+          text: CapitalizeFirstLetter(item.otherArticleTitle),
+          imageSrc: CleanImgSrcLink(item.otherArticleImgSrc),
+          link: item.otherArticleLink,
+          badgeText: item.otherArticleTime,
+        };
+      });
+
+      setOtherNewsLocal(otherLocalNews);
+
+      const otherBusinessNews = apiData[0].otherBusiness.map((item) => {
+        return {
+          title: item.title,
+          text: CapitalizeFirstLetter(item.title),
+          imageSrc: CleanImgSrcLink(item.imgSrc),
+          link: item.link,
+          badgeText: item.timeLeft,
+        };
+      });
+
+      setOtherNewsBusiness(otherBusinessNews);
+
+      showToast("Loaded.", "News data updated!", "success");
+      setIsLoading(false);
     }
   }, [apiData]);
 
   return (
     <>
       <Box
-        minHeight="100vh"
-        bg={useColorModeValue("blackAlpha.100", "gray.900")}
+        position="relative"
+        backgroundSize={'contain'}
+        bgImage={useColorModeValue(Constants.WHITE_TEXTUREIMG_URL, "linear-gradient(rgba(255, 255, 255, 0),rgba(255, 255, 255, 0)) ," + Constants.BLACK_TEXTUREIMG_URL)}
       >
         <Center
           h="50px"
@@ -119,20 +154,46 @@ export default function Home() {
           <Skeleton height="100vh" mt="1rem" />
         ) : (
           <>
-            <TopHeadlines
+            <DualCardSection
               mt="0.5rem"
               baseMb="0rem"
               mdMb="1.5rem"
               headline="Local News"
-              featured={apiData[0].featured}
+              leftCardImgSrc={localFeatured.featuredImgSrc}
+              rightCardImgSrc={localFeatured.topNewsImgSrc}
+              leftCardTitle={localFeatured.featuredTitle}
+              rightCardTitle={localFeatured.topNewsTitle}
+              leftBadgeText={localFeatured.featuredArticleTime}
+              rightBadgeText={localFeatured.topNewsArticleTime}
+              leftCardLink={localFeatured.featuredLink}
+              rightCardLink={localFeatured.topNewsLink}
             />
-            <OtherLocalNews
-              headline="Other Local News"
-              otherLocalNews={apiData[0].others}
+
+            <Spacer />
+
+            <Carousel cards={OtherNewsLocal} headline="Other Local News" />
+
+            <Spacer />
+
+            <DualCardSection
+              mt="0.5rem"
+              baseMb="0rem"
+              mdMb="1.5rem"
+              headline="Business News"
+              leftCardImgSrc={BusinessFeatured.articleImgSrc}
+              rightCardImgSrc={BusinessTop.articleImgSrc}
+              leftCardTitle={BusinessFeatured.articleTitle}
+              rightCardTitle={BusinessTop.articleTitle}
+              leftBadgeText={BusinessFeatured.articleTime}
+              rightBadgeText={BusinessTop.articleTime}
+              leftCardLink={BusinessFeatured.articleLink}
+              rightCardLink={BusinessTop.articleTime}
             />
-            {/* 
-              <TopHeadlines mt='0' headline='Business News' />
-              <OtherNews headline='Other Business News' /> */}
+
+            <Spacer />
+
+            <Carousel cards={OtherNewsBusiness} headline="Other Business News" />
+
           </>
         )}
       </Box>

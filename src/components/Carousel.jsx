@@ -6,7 +6,6 @@ import {
   IconButton,
   useBreakpointValue,
   Stack,
-  Heading,
   Text,
   Container,
   Center,
@@ -17,6 +16,8 @@ import {
 } from "@chakra-ui/react";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 import Slider from "react-slick";
+
+import * as Constants from "../constants/constants";
 
 // Settings for the slider
 const settings = {
@@ -47,8 +48,9 @@ export default function Carousel({ cards, headline }) {
   return (
     <Flex
       flexDir="column"
+      pb='1rem'
     >
-      <Box w="100%">
+      <Box w="100%" my='1rem'>
         <Center fontWeight="bold" fontSize={22} letterSpacing="1px">
           {headline}
         </Center>
@@ -57,8 +59,11 @@ export default function Carousel({ cards, headline }) {
         ml="auto"
         mr="auto"
         width="95%"
-        bg={useColorModeValue("white", "black")}
-        p="1rem"
+        // bg={useColorModeValue("white", "black")}
+        backgroundSize={'cover'}
+        bgImage={useColorModeValue("linear-gradient(rgba(248, 247, 216, 0.6),rgba(248, 247, 216, 0.6)), " + Constants.NEWS_BACKGROUNDIMG_URL,
+          "linear-gradient(rgba(97, 96, 216, 0.6),rgba(248, 247, 216, 0.6)) , " + Constants.NEWS_BACKGROUNDIMG_URL)}
+        p="1.25rem"
         rounded="full"
         borderColor={useColorModeValue("gray.100", "white")}
         borderRadius="lg"
@@ -129,10 +134,10 @@ export default function Carousel({ cards, headline }) {
                 border="0"
                 outline={"none"}
               >
-                <Container w={{ base: "100%", md: "70%" }} h="100%">
+                <Container w={{ base: "100%", md: "62%" }} h="100%">
                   <Container
                     size="container.lg"
-                    height={{ base: isLessThanRegularHeight ? "49vh" : "54vh", md: "61vh" }}
+                    height={{ base: isLessThanRegularHeight ? "48vh" : "54vh", md: "61vh" }}
                     position="relative"
                     p="0"
                   >
@@ -148,22 +153,28 @@ export default function Carousel({ cards, headline }) {
                       <Stack
                         spacing={4}
                         position="absolute"
-                        top={{ base: "55%", md: "60%" }}
+                        top={{ base: isLessThanRegularHeight ? "45%" : "57%", sm: isLessThanRegularHeight ? "55%" : "57%", md: "50%", lg: "60%" }}
                         left={'12px'}
                         transform={{ base: "translate(0%, -40%)", md: "translate(0%, -60%)" }}
                         alignItems={"center"}
                         p="0.75rem"
-                        backgroundColor={{ sm: "transparent", md: "whiteAlpha.700" }}
-                        rounded={"lg"}
+                        backgroundColor={{ sm: "transparent", md: "whiteAlpha.600" }}
+                        rounded={"xl"}
                       >
                         <Box
-                          bg={useColorModeValue("#e6e8ee", "blackAlpha.700")}
+                          bgImage={{
+                            base: useColorModeValue("linear-gradient(rgba(255,255,255,1),rgba(255,255,255,1)), " + Constants.NEWS_BACKGROUNDIMG_URL,
+                              "linear-gradient(rgba(21, 2, 58, 0.9),rgba(97, 96, 216, 0.9)), " + Constants.NEWS_BACKGROUNDIMG_URL),
+                            md: useColorModeValue("linear-gradient(rgba(255,255,255,1),rgba(255,255,255,1)), " + Constants.NEWS_BACKGROUNDIMG_URL,
+                              "linear-gradient(rgba(21, 2, 58, 0.9),rgba(97, 96, 216, 0.9)) , " + Constants.NEWS_BACKGROUNDIMG_URL)
+                          }}
+                          zIndex='2'
                           rounded={"lg"}
                           p="0.5rem"
                         >
                           <Text
-                            fontSize={{ base: "sm", md: "md", lg: "lg" }}
-                            color={useColorModeValue("black", "white")}
+                            fontSize={{ base: "xs", md: "sm", lg: "lg" }}
+                            color={{ base: 'white', md: useColorModeValue("black", "white") }}
                             fontWeight="semibold"
                             align="center"
                           >
@@ -173,11 +184,12 @@ export default function Carousel({ cards, headline }) {
                         <Center>
                           <Badge
                             borderRadius="full"
-                            mt="1rem"
+                            border={'1px'}
+                            mt="2rem"
                             px="2"
-                            py="1"
-                            bg={useColorModeValue("gray.300", "blackAlpha.700")}
-                            color={useColorModeValue("gray.800", "white")}
+                            py="0.5rem"
+                            bg={useColorModeValue("gray.100", "gray.200")}
+                            color="red.500"
                             ml="0.25em"
                             fontStyle="italic"
                             fontSize={{ base: "xs" }}
@@ -193,7 +205,7 @@ export default function Carousel({ cards, headline }) {
             ))}
           </Slider>
         </Box>
-      </Flex>
-    </Flex>
+      </Flex >
+    </Flex >
   );
 }

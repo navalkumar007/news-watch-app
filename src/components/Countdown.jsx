@@ -5,8 +5,7 @@ const STATUS = {
     STARTED: 'Started',
 }
 
-const INITIAL_COUNT = 3600
-// const INITIAL_COUNT = 10;
+const INITIAL_COUNT = 3600 //1 hr
 
 export const Countdown = forwardRef((props, ref) => {
     const twoDigits = (num) => String(num).padStart(2, '0')

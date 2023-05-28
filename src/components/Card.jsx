@@ -6,12 +6,13 @@ import {
   Box,
   Center,
   Image,
-  Text,
   useColorModeValue,
   ScaleFade,
   Link,
   Badge,
 } from "@chakra-ui/react";
+
+import * as Constants from "../constants/constants";
 
 export const Card = ({
   height,
@@ -47,7 +48,9 @@ export const Card = ({
           marginRight="auto"
           mt={{ base: "1rem", md: "0rem" }}
           transform={{ base: "none" }}
-          bg={useColorModeValue("white", "")}
+          backgroundSize={'cover'}
+          bgImage={useColorModeValue("linear-gradient(rgba(248, 247, 216, 0.6),rgba(248, 247, 216, 0.6)), " + Constants.NEWS_BACKGROUNDIMG_URL,
+            "linear-gradient(rgba(97, 96, 216, 0.6),rgba(248, 247, 216, 0.6)) , " + Constants.NEWS_BACKGROUNDIMG_URL)}
           borderColor={useColorModeValue("gray.100", "white")}
           borderRadius="lg"
           borderWidth="1px"
@@ -63,10 +66,11 @@ export const Card = ({
               fontSize={20}
               letterSpacing="1px"
               py="0.5rem"
+              color={useColorModeValue("black", "darkThemeColor.900")}
             >
               {CardTitle}
             </Center>
-            <Flex justifyContent="center" bg="black" rounded="md" mx="0.5rem">
+            <Flex justifyContent="center" bg="black" rounded="md" mx="1.25rem">
               <Image
                 src={imgSrc}
                 alt={alt}
@@ -78,23 +82,27 @@ export const Card = ({
                 loading="lazy"
               />
             </Flex>
-            <Box p={6}>
+            <Box p={6} textAlign='center' mx={'2rem'}>
               <Center
                 fontWeight="semibold"
-                fontSize={16}
+                fontSize={{ base: 12, md: 15 }}
                 letterSpacing="0.5px"
-                pb="20px"
+                rounded={'md'}
+                bg={useColorModeValue("transparent", "linear-gradient(rgba(21, 2, 58, 0.9),rgba(97, 96, 216, 0.9))")}
+                py="5px"
+                px="1rem"
               >
                 {CardSubtitle}
               </Center>
               <Center>
                 <Badge
                   borderRadius="full"
+                  border={'1px'}
                   mt="1rem"
                   px="2"
-                  py="1"
-                  bg={useColorModeValue("gray.300", "gray.200")}
-                  color="gray.600"
+                  py="0.5rem"
+                  bg={useColorModeValue("gray.100", "gray.200")}
+                  color="red.500"
                   ml="0.25em"
                   style={{ fontStyle: "italic" }}
                 >
