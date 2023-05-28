@@ -92,6 +92,7 @@ export const Card = ({
                 fontSize={{ base: 12, md: 15 }}
                 letterSpacing="0.5px"
                 rounded={"md"}
+                border={"1px"}
                 bg={useColorModeValue(
                   "transparent",
                   "linear-gradient(rgba(21, 2, 58, 0.9),rgba(97, 96, 216, 0.9))"

@@ -181,6 +181,7 @@ export default function Carousel({ cards, headline }) {
                         rounded={"xl"}
                       >
                         <Box
+                          border={"1px"}
                           bgImage={{
                             base: useColorModeValue(
                               "linear-gradient(rgba(255,255,255,1),rgba(255,255,255,1)), " +
