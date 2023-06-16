@@ -15,17 +15,14 @@ export default function Navbar() {
   return (
     <>
       <Box
-        bg={useColorModeValue(
-          "linear-gradient(rgba(248, 247, 216, 0.6),rgba(248, 247, 216, 0.6))",
-          "darkThemeColor.900"
-        )}
+        bg={useColorModeValue("white", "darkThemeColor.900")}
         px={4}
-        transition="background-color 200ms linear"
+        boxShadow="0 2px 4px rgba(0, 0, 0, 0.1)"
       >
-        <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
+        <Flex h={"70px"} alignItems={"center"} justifyContent={"space-between"}>
           <Flex>
             <Text as="span" pr={"0.25rem"} textStyle="logoLeft">
-              NASK{" "}
+              NASK
             </Text>
             <Text as="span" textStyle="logoRight">
               Tech

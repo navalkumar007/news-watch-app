@@ -86,13 +86,18 @@ export const Card = ({
                 loading="lazy"
               />
             </Flex>
-            <Box p={6} textAlign="center" mx={"2rem"}>
+            <Box
+              p={6}
+              textAlign="center"
+              mx={"2rem"}
+              boxShadow={"0px 5px 10px 0px rgba(0, 0, 0, 0.5); "}
+            >
               <Center
                 fontWeight="semibold"
                 fontSize={{ base: 12, md: 15 }}
                 letterSpacing="0.5px"
                 rounded={"md"}
-                border={"1px"}
+                border={useColorModeValue("1px dashed", "1px solid")}
                 bg={useColorModeValue(
                   "transparent",
                   "linear-gradient(rgba(21, 2, 58, 0.9),rgba(97, 96, 216, 0.9))"

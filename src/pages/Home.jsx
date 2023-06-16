@@ -11,6 +11,7 @@ import {
   useToast,
   Spacer,
 } from "@chakra-ui/react";
+import { RepeatClockIcon } from "@chakra-ui/icons";
 
 import "../index.scss";
 
@@ -18,9 +19,8 @@ import { CleanImgSrcLink, CapitalizeFirstLetter } from "../helpers/functions";
 import * as Constants from "../constants/constants";
 import { Countdown } from "../components/Countdown";
 import { DualCardSection } from "../components/DualCards";
-import Carousel from './../components/Carousel';
+import Carousel from "./../components/Carousel";
 import NewsDataService from "../services/NewsService";
-
 
 export default function Home() {
   const toast = useToast();
@@ -73,7 +73,6 @@ export default function Home() {
 
   useEffect(() => {
     if (apiData.length !== 0) {
-
       //Set the values
       setLocalFeatured(apiData[0].featured);
       setBusinessFeatured(apiData[0].business.featBusinessArticle);
@@ -112,8 +111,8 @@ export default function Home() {
     <>
       <Box
         position="relative"
-        backgroundSize={'contain'}
-        bgImage={useColorModeValue(Constants.WHITE_TEXTUREIMG_URL, "linear-gradient(rgba(255, 255, 255, 0),rgba(255, 255, 255, 0)) ," + Constants.BLACK_TEXTUREIMG_URL)}
+        backgroundSize={"contain"}
+        bgImage={Constants.HEX_BG_URL}
       >
         <Center
           h="50px"
@@ -144,7 +143,15 @@ export default function Home() {
               size="xl"
             />
           ) : (
-            <Button colorScheme="teal" variant="solid" onClick={handleClick}>
+            <Button
+              rightIcon={<RepeatClockIcon boxSize={5} p={"0"} />}
+              color={"white"}
+              onClick={handleClick}
+              boxShadow={
+                "inset -20px 0 25px #ffffff28, inset -20px 0 300px #319795,0 0 10px #fff,-10px 0 25px #f5d3f5,10px 0 25px #0ff;"
+              }
+              borderRadius={"10px"}
+            >
               Refresh Now
             </Button>
           )}
@@ -155,9 +162,9 @@ export default function Home() {
         ) : (
           <>
             <DualCardSection
-              mt="0.5rem"
+              mt="0.75rem"
               baseMb="0rem"
-              mdMb="1.5rem"
+              mdMb="1.25rem"
               headline="Local News"
               leftCardImgSrc={localFeatured.featuredImgSrc}
               rightCardImgSrc={localFeatured.topNewsImgSrc}
@@ -192,8 +199,10 @@ export default function Home() {
 
             <Spacer />
 
-            <Carousel cards={OtherNewsBusiness} headline="Other Business News" />
-
+            <Carousel
+              cards={OtherNewsBusiness}
+              headline="Other Business News"
+            />
           </>
         )}
       </Box>

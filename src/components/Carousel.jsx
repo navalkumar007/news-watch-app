@@ -12,6 +12,7 @@ import {
   Badge,
   useColorModeValue,
   Link,
+  Tag,
   useMediaQuery,
 } from "@chakra-ui/react";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
@@ -53,7 +54,14 @@ export default function Carousel({ cards, headline }) {
     <Flex flexDir="column" pb="1rem">
       <Box w="100%" my="1rem">
         <Center fontWeight="bold" fontSize={22} letterSpacing="1px">
-          {headline}
+          <Tag
+            size={"2xl"}
+            p={"2"}
+            rounded={"full"}
+            bg={useColorModeValue("white", "darkThemeColor.900")}
+          >
+            {headline}
+          </Tag>
         </Center>
       </Box>
       <Flex
