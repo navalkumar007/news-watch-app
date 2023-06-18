@@ -29,10 +29,6 @@ const CustomTheme = extendTheme({
       "body::-webkit-scrollbar-thumb": {
         backgroundColor: mode("#bec3cc", "#31058a")(props),
       },
-      body: {
-        transitionProperty: "all",
-        transitionDuration: "normal",
-      },
     }),
   },
   config: {
