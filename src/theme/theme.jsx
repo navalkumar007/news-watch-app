@@ -1,8 +1,11 @@
 import { extendTheme } from "@chakra-ui/react";
-import { mode } from '@chakra-ui/theme-tools'
+import { mode } from "@chakra-ui/theme-tools";
 
 const CustomTheme = extendTheme({
-  initialColorMode: 'system',
+  fonts: {
+    body: `'Mona Sans Black', sans-serif`,
+  },
+  initialColorMode: "system",
   useSystemColorMode: true,
   colors: {
     darkThemeColor: {
@@ -11,22 +14,25 @@ const CustomTheme = extendTheme({
   },
   textStyles: {
     logoLeft: {
-      fontFamily: 'Khand',
-      fontSize: '30px',
-      fontWeight: '700',
+      fontFamily: "Khand",
+      fontSize: "30px",
+      fontWeight: "700",
     },
     logoRight: {
-      fontFamily: 'Oooh Baby',
-      fontSize: '30px',
-      fontWeight: '800',
+      fontFamily: "Oooh Baby",
+      fontSize: "30px",
+      fontWeight: "800",
     },
   },
   styles: {
     global: (props) => ({
-      'body::-webkit-scrollbar-thumb': {
-        'backgroundColor': mode('#bec3cc', '#31058a')(props),
+      "body::-webkit-scrollbar-thumb": {
+        backgroundColor: mode("#bec3cc", "#31058a")(props),
       },
-    })
+    }),
+  },
+  config: {
+    disableTransitionOnChange: false,
   },
 });
 
