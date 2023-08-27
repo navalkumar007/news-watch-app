@@ -1,70 +1,225 @@
-# Getting Started with Create React App
+<br/>
+<p align="center">
+  <a href="https://github.com/navalkumar007/news-watch-app">
+    <img src="https://i.postimg.cc/NG4NLKbh/news192.png" alt="Logo" width="80" height="80">
+  </a>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  <h3 align="center">News Watch App</h3>
 
-## Available Scripts
+  <p align="center">
+    Front-End for News Scraper API
+    <br/>
+    <br/>
+  </p>
+</p>
 
-In the project directory, you can run:
+## Table Of Contents
 
-### `npm start`
+* [About the Project](#about-the-project)
+* [Built With](#built-with)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+* [Authors](#authors)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## About The Project
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![Screen Shot](https://i.postimg.cc/J47HZtZS/Screenshot.png)
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Built With
 
-### `npm run build`
+• React
+• ChakraUI
+• ViteJs
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To get a local copy up and running follow these simple example steps.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
 
-### `npm run eject`
+* npm
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```sh
+npm install npm@latest -g
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* news scraper api access or placeholder provided
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+> [!IMPORTANT]  
+> The project pulls news articles from the news scraper api and displays it to the frontend.
+> If I didn't release the api code along with this frontend code; you may modify "Home.jsx" file with the placeholder code below.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```markdown
+import React, { useRef, useState, useEffect } from "react";
 
-## Learn More
+import {
+  Box,
+  useColorModeValue,
+  Center,
+  Badge,
+  Button,
+  Skeleton,
+  Spinner,
+  useToast,
+  Spacer,
+} from "@chakra-ui/react";
+import { RepeatClockIcon } from "@chakra-ui/icons";
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+import "../index.scss";
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+import { CleanImgSrcLink, CapitalizeFirstLetter } from "../helpers/functions";
+import * as Constants from "../constants/constants";
+import { Countdown } from "../components/Countdown";
+import { DualCardSection } from "../components/DualCards";
+import Carousel from "./../components/Carousel";
+import NewsDataService from "../services/NewsService";
 
-### Code Splitting
+export default function Home() {
+  const toast = useToast();
+  const childRef = useRef(null);
+  // const [apiData, setApiData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [OtherNewsLocal, setOtherNewsLocal] = useState({});
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+  const handleClick = () => {
+    childRef.current.handleReset();
+  };
 
-### Analyzing the Bundle Size
+  const showToast = (title, description, status) => {
+    toast({
+      title: title,
+      description: description,
+      duration: 2000,
+      isClosable: false,
+      status: status,
+      position: "top-right",
+    });
+  };
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+  useEffect(() => {
+    const otherLocalNews = [
+      {
+        title: "",
+        text: "Labore ipsum deserunt eu Lorem commodo culpa et ex amet non. Nulla ea in ullamco occaecat labore. Enim est reprehenderit nostrud Lorem. In eu sint esse excepteur do eiusmod. Ex sit dolore id eiusmod.",
+        imageSrc: "https://placehold.co/1200x675",
+        link: "#",
+        badgeText: "2 hours",
+      },
+      {
+        title: "",
+        text: "Aliqua commodo elit esse ex ad. Pariatur dolore id velit veniam nostrud eiusmod incididunt reprehenderit nisi incididunt fugiat. Mollit aliqua labore aliqua excepteur officia in voluptate incididunt veniam qui incididunt. Amet minim tempor pariatur ex aute commodo magna do commodo elit proident sint. Ex dolore proident eiusmod sit.",
+        imageSrc: "https://placehold.co/1200x675",
+        link: "#",
+        badgeText: "4 hours",
+      },
+    ];
 
-### Making a Progressive Web App
+    setOtherNewsLocal(otherLocalNews);
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+    showToast("Loaded.", "News data updated!", "success");
+    setIsLoading(false);
+  }, []);
 
-### Advanced Configuration
+  return (
+    <>
+      <Box
+        position="relative"
+        backgroundSize={"contain"}
+        bgImage={Constants.HEX_BG_URL}
+      >
+        <Center
+          h="50px"
+          color={useColorModeValue("black", "white")}
+          fontWeight="semibold"
+          fontSize="md"
+        >
+          Auto-refreshing in....
+          <Badge
+            borderRadius="full"
+            px="2"
+            py="1"
+            bg={useColorModeValue("whiteAlpha.500", "gray.200")}
+            color="red.500"
+            ml="0.25em"
+          >
+            {/* <Countdown ref={childRef} fetchData={fetchData} /> */}
+          </Badge>
+        </Center>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+        <Center h="50px" color={useColorModeValue("black", "white")}>
+          {isLoading == true ? (
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="teal"
+              size="xl"
+            />
+          ) : (
+            <Button
+              rightIcon={<RepeatClockIcon boxSize={5} p={"0"} />}
+              color={"white"}
+              onClick={handleClick}
+              boxShadow={
+                "inset -20px 0 25px #ffffff28, inset -20px 0 300px #319795,0 0 10px #fff,-10px 0 25px #f5d3f5,10px 0 25px #0ff;"
+              }
+              borderRadius={"10px"}
+            >
+              Refresh Now
+            </Button>
+          )}
+        </Center>
 
-### Deployment
+        {isLoading == true ? (
+          <Skeleton height="100vh" mt="1rem" />
+        ) : (
+          <>
+            <DualCardSection
+              mt="0.75rem"
+              baseMb="0rem"
+              mdMb="1.25rem"
+              headline="Local News"
+              leftCardImgSrc="https://placehold.co/600x400"
+              rightCardImgSrc="https://placehold.co/600x400"
+              leftCardTitle="Placeholder"
+              rightCardTitle="Placeholder"
+              leftBadgeText="2 hours ago"
+              rightBadgeText="1 hour ago"
+              leftCardLink="#"
+              rightCardLink="#"
+            />
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+            <Spacer />
 
-### `npm run build` fails to minify
+            <Carousel cards={OtherNewsLocal} headline="Other Local News" />
+          </>
+        )}
+      </Box>
+    </>
+  );
+}
+```
+### Installation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Clone the repo
+
+```sh
+git clone https://github.com/navalkumar007/news-watch-app.git
+```
+
+2. Install NPM packages
+
+```sh
+npm install
+```
+
+3. Replace Home.jsx code(if api code not provided by me) with placeholder provided
+
+
+3. Done!
+
+## Authors
+
+* **Naval Kumar** - *Software Engineer* - [Naval Kumar](https://github.com/navalkumar007/) - *All the work*
